@@ -8,7 +8,7 @@ library("wsyn")
 times<-1:50
 sp1<-sin(2*pi*times/4)+rnorm(50, mean=0, sd=0.5)+1.1
 sp2<-sp1 + sin(2*pi*times/8)+rnorm(50, mean=0, sd=0.5)
-sp3<-sp2 + 3*sin(2*pi*times/8+4)+rnorm(50, mean=0, sd=0.5)+3.1
+sp3<-3*sin(2*pi*times/8+2*pi*runif(1))+3.1 +rnorm(50, mean=0, sd=0.5)
 
 dat<-rbind(sp1, sp2, sp3)
 
@@ -64,6 +64,10 @@ plotmag(sp1.2coh)#black lines are the 96th and 99th quantiles of coherence of su
 plotphase(sp1.2coh)
 #negative phase indicates dat2 is leading dat 1, positive phase indicates dat 1 is leading dat 2.
 #result is that as predicted, sp 1 is synchronous (in-phase) with sp2 at around 3-5 year timescales.
+#general rules are : 
+#if -0.25pi < phase < 0.25pi, this is approximately in-phase
+#if -0.75pi <= phase <= -0.25pi, or 0.25pi <= phase <= 0.75pi, this is lagged synchrony
+#if phase < -0.75pi or phase > 0.75pi, this is approximately anti-phase. 
 
 #wavelet coherence between sp2 and sp3
 sp2.3coh<-coh(dat1=clndat[2,], dat2=clndat[3,], times=1:50, norm="powall", 
@@ -73,4 +77,9 @@ sp2.3coh<-bandtest(sp2.3coh, c(6,10))
 get_bandp(sp2.3coh)
 plotmag(sp2.3coh)
 plotphase(sp2.3coh)
-#hm the 8 yr timescale is not showing up
+#note that long timescales are a bit harder to detect compared to short timescales, just because there are more short cycles, so sometimes the long timescale coherence may not show up
+#assuming that there was an 8 year cycle, the plotphase graph tells us that sp2 was lagging behind sp3, such that they were almost anti-phase, which is what we see in the plot of the timeseries
+
+#wavelet coherence between sp1 and ev1 (4 year cycles)
+
+#wavelet coherence between sp3 and ev2 (8 year cycles)
