@@ -115,3 +115,5 @@ plotphase(sp3ev2coh)
 plot(times, clnev[2,], type="l", xlab="time", ylab="Transformed index", ylim=c(-3,3))
 lines(times, clndat[3,], col="blue")
 #plot of timeseries shows the anti-phase relationship between sp3 and ev2 at ~8 year timescales
+
+##upload some real ANE FAO catch data with questions to answer
