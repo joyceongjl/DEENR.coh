@@ -116,4 +116,16 @@ plot(times, clnev[2,], type="l", xlab="time", ylab="Transformed index", ylim=c(-
 lines(times, clndat[3,], col="blue")
 #plot of timeseries shows the anti-phase relationship between sp3 and ev2 at ~8 year timescales
 
-##upload some real ANE FAO catch data with questions to answer
+##upload some real ANE FAO catch data, ANE_sp6_ev4.csv
+#note that these timeseries data have already been optimal box-cox transformed
+#csv file consists of transformed catches of 6 species from ANE (region 27) and also 4 environmental variables
+#NAOdm = North Atlantic Oscillation from dec-mar, MEIjj = Multivariate ENSO index from july to june of the next year,
+#AMOyr = Atlantic Multidecadal Oscillation annual value, CrudeOil = price of annual crude oil
+
+#Q1. Get csv data into suitable format to run analyses in package "wsyn", ie. matrix with proper rownames (labels) and column names (years from 1955-2014)
+#note, answer to str(data) should be num [1:10, 1:60] ... ...
+
+#Q2. Do plots of the 6 species timeseries and the 4 env vars separatedly (or together) to see what the data looks like
+#note, there are multiple ways to plot this
+
+#Q3. Do wavelet mean field and wavelet phasor mean field plots for the 6 species
