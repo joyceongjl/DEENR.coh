@@ -116,16 +116,24 @@ plot(times, clnev[2,], type="l", xlab="time", ylab="Transformed index", ylim=c(-
 lines(times, clndat[3,], col="blue")
 #plot of timeseries shows the anti-phase relationship between sp3 and ev2 at ~8 year timescales
 
+#10min break
 ##upload some real ANE FAO catch data, ANE_sp6_ev4.csv
 #note that these timeseries data have already been optimal box-cox transformed
 #csv file consists of transformed catches of 6 species from ANE (region 27) and also 4 environmental variables
 #NAOdm = North Atlantic Oscillation from dec-mar, MEIjj = Multivariate ENSO index from july to june of the next year,
 #AMOyr = Atlantic Multidecadal Oscillation annual value, CrudeOil = price of annual crude oil
 
-#Q1. Get csv data into suitable format to run analyses in package "wsyn", ie. matrix with proper rownames (labels) and column names (years from 1955-2014)
+##Q1. Get csv data into suitable format to run analyses in package "wsyn", ie. matrix with proper rownames (labels) and column names (years from 1955-2014)
 #note, answer to str(data) should be num [1:10, 1:60] ... ...
 
-#Q2. Do plots of the 6 species timeseries and the 4 env vars separatedly (or together) to see what the data looks like
+##Q2. Do plots of the 6 species timeseries and the 4 env vars separatedly (or together) to see what the data looks like
 #note, there are multiple ways to plot this
 
-#Q3. Do wavelet mean field and wavelet phasor mean field plots for the 6 species
+##Q3. Do wavelet mean field and wavelet phasor mean field plots for the 6 species, what sort of timscale bands do you think might be important to test?
+#try to think of between 2-4 timescale bands to test, remembering that longer timescales have less cycles so its harder to test
+
+##Q4. Which of the species are coherent with each other at the identified timescale bands? What about the environmental variables?
+#note, check function synmat to do multiple species at a time.
+
+##Q5. Choose a few of the interesting examples and do wavelet coherence to figure out what type of coherence (in-phase, anti-phase or lagged) exists.
+#note, also do plots of the examples to see the patterns visually.
