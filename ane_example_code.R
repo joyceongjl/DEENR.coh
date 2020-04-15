@@ -40,11 +40,11 @@ plot(wt.NAO$timescales, timeavg.nao, type="l", xlab="Timescale", ylab="Power")
 #strong 8 yr timescale, also 4-6 year timescale
 
 ##Q4 code (wavelet coherence matrices)
-anecoh2.4<-synmat(ane.sp6.ev4, times=1955:2014, method="coh", scale.max.input = 16, tsrange=c(2,4))# coherence value
+anecoh2.4<-synmat(ane.sp6.ev4, times=1955:2014, method="coh", scale.max.input = 20, tsrange=c(2,4))# coherence value
 rownames(ane.sp6.ev4)#full names of species and env vars
 rownames(anecoh2.4)<-c("T.tra", "P.spp", "B.boo", "D.mac", "P.ery", "S.aur", "NAO", "MEI", "AMO", "Oil")
 colnames(anecoh2.4)<-c("T.tra", "P.spp", "B.boo", "D.mac", "P.ery", "S.aur", "NAO", "MEI", "AMO", "Oil")
-anecohsig2.4<-synmat(ane.sp6.ev4, times=1955:2014, method="coh.sig.fast", scale.max.input = 16, tsrange=c(2,4), nsurrogs=1000) #significance of coherence based on 1000 surrogates
+anecohsig2.4<-synmat(ane.sp6.ev4, times=1955:2014, method="coh.sig.fast", scale.max.input = 20, tsrange=c(2,4), nsurrogs=1000) #significance of coherence based on 1000 surrogates
 anecoh2.4pvals<-1-anecohsig2.4 #because the default values for synmat gives 1-p-values
 colbwr<-colorRampPalette(c("blue", "white", "red"))#to specify colour palette
 corrplot(anecoh2.4, method="number", type="lower", tl.pos="ld", tl.srt=0, tl.offset=0.7, 
@@ -56,10 +56,10 @@ mtext("Coherence at timescale 2-4 years (p<0.01)", side=3, line=3)
 #MEI and crude oil seem to have strong coherences with Penaeus spp (shrimps) and dentex at 2-4yr timescales
 #for further env analyses, choose crude oil and shrimps
 
-anecoh4.8<-synmat(ane.sp6.ev4, times=1955:2014, method="coh", scale.max.input = 16, tsrange=c(4,8))
+anecoh4.8<-synmat(ane.sp6.ev4, times=1955:2014, method="coh", scale.max.input = 20, tsrange=c(4,8))
 rownames(anecoh4.8)<-c("T.tra", "P.spp", "B.boo", "D.mac", "P.ery", "S.aur", "NAO", "MEI", "AMO", "Oil")
 colnames(anecoh4.8)<-c("T.tra", "P.spp", "B.boo", "D.mac", "P.ery", "S.aur", "NAO", "MEI", "AMO", "Oil")
-anecohsig4.8<-synmat(ane.sp6.ev4, times=1955:2014, method="coh.sig.fast", scale.max.input = 16, 
+anecohsig4.8<-synmat(ane.sp6.ev4, times=1955:2014, method="coh.sig.fast", scale.max.input = 20, 
                     tsrange=c(4,8), nsurrogs=1000)
 anecoh4.8pvals<-1-anecohsig4.8 
 corrplot(anecoh4.8, method="number", type="lower", tl.pos="ld", tl.srt=0, tl.offset=0.7, 
@@ -67,12 +67,12 @@ corrplot(anecoh4.8, method="number", type="lower", tl.pos="ld", tl.srt=0, tl.off
          sig.level=0.01, insig="blank")
 mtext("Coherence at timescale 4-8 years (p<0.01)", side=3, line=3)
 #all 6 species is strongly coherent with another species at 4-8 yr timescales
-#for further env analyses try crude oil and dentex.
+#no strong coherence for env vars with species?
 
-anecoh8.16<-synmat(ane.sp6.ev4, times=1955:2014, method="coh", scale.max.input = 16, tsrange=c(8,16))
+anecoh8.16<-synmat(ane.sp6.ev4, times=1955:2014, method="coh", scale.max.input = 20, tsrange=c(8,16))
 rownames(anecoh8.16)<-c("T.tra", "P.spp", "B.boo", "D.mac", "P.ery", "S.aur", "NAO", "MEI", "AMO", "Oil")
 colnames(anecoh8.16)<-c("T.tra", "P.spp", "B.boo", "D.mac", "P.ery", "S.aur", "NAO", "MEI", "AMO", "Oil")
-anecohsig8.16<-synmat(ane.sp6.ev4, times=1955:2014, method="coh.sig.fast", scale.max.input = 16, 
+anecohsig8.16<-synmat(ane.sp6.ev4, times=1955:2014, method="coh.sig.fast", scale.max.input = 20, 
                      tsrange=c(8,16), nsurrogs=1000)
 anecoh8.16pvals<-1-anecohsig8.16 
 corrplot(anecoh8.16, method="number", type="lower", tl.pos="ld", tl.srt=0, tl.offset=0.7, 
@@ -85,3 +85,26 @@ mtext("Coherence at timescale 8-16 years (p<0.01)", side=3, line=3)
 ##Q5 code (specific examples)
 #for species, choose P.ery (row 5) and P.spp (row 2)
 #for env, choose cruide oil (row 10) and dentex (row 4)
+sp2.5coh<-coh(dat1=ane.sp6.ev4[2,], dat2=ane.sp6.ev4[5,], times=1955:2014, norm="powall", 
+              sigmethod="fast", nrand=1000, scale.min=2, scale.max.input = 20)
+sp2.5coh<-bandtest(sp2.5coh, c(2,4))
+sp2.5coh<-bandtest(sp2.5coh, c(4,6))
+sp2.5coh<-bandtest(sp2.5coh, c(8,16))
+get_bandp(sp2.5coh)
+#P.ery and shrimps significantly coherent at all 3 timescale bands
+plotmag(sp2.5coh)#seems like 3yr, 6-8yr and 10-14yr timescales are significant
+plotphase(sp2.5coh)
+#at 3 yr timescales, shrimp is lagging slightly behind P.ery.
+#at 6-8yr timescales, P.ery and shrimp are in-phase/synchronous
+#at 10-14yr timescales, P.ery is lagging behind shrimp by half a cycle
+
+oil.den.coh<-coh(dat1=ane.sp6.ev4[10,], dat2=ane.sp6.ev4[4,], times=1955:2014, norm="powall", 
+                 sigmethod="fast", nrand=1000, scale.min=2, scale.max.input = 20)
+oil.den.coh<-bandtest(oil.den.coh, c(2,4))
+oil.den.coh<-bandtest(oil.den.coh, c(4,6))
+oil.den.coh<-bandtest(oil.den.coh, c(8,16))
+get_bandp(oil.den.coh)
+#Crude oil and dentex significantly coherent at 2-4yr timescales
+plotmag(oil.den.coh)#seems like 3yr timescale is significant
+plotphase(oil.den.coh)
+#at 3yr timescales, cruide oil is leading dentex catches by half a cycle.
