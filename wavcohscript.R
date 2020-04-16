@@ -59,7 +59,7 @@ sp1.2coh<-coh(dat1=clndat[1,], dat2=clndat[2,], times=1:50, norm="powall",
 sp1.2coh<-bandtest(sp1.2coh, c(3,5))
 sp1.2coh<-bandtest(sp1.2coh, c(6,10))
 get_bandp(sp1.2coh)
-plotmag(sp1.2coh)#black lines are the 96th and 99th quantiles of coherence of surrogates
+plotmag(sp1.2coh)#black lines are the 95th and 99th quantiles of coherence of surrogates
 #solid red line is actual value of coherence, dashed red line is for significance of coherence
 plotphase(sp1.2coh)
 #negative phase indicates dat2 is leading dat 1, positive phase indicates dat 1 is leading dat 2.

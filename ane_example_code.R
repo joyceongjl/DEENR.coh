@@ -97,6 +97,9 @@ plotphase(sp2.5coh)
 #at 3 yr timescales, shrimp is lagging slightly behind P.ery.
 #at 6-8yr timescales, P.ery and shrimp are in-phase/synchronous
 #at 10-14yr timescales, P.ery is lagging behind shrimp by half a cycle
+plot(1955:2014, ane.sp6.ev4[2,], type="l", xlab="time", ylab="Transformed index", ylim=c(-5,3))
+lines(1955:2014, ane.sp6.ev4[5,], col="blue")
+
 
 oil.den.coh<-coh(dat1=ane.sp6.ev4[10,], dat2=ane.sp6.ev4[4,], times=1955:2014, norm="powall", 
                  sigmethod="fast", nrand=1000, scale.min=2, scale.max.input = 20)
